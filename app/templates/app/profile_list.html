@@ -1,0 +1,35 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="container">
+    <a href="{% url 'app:new_profile'  %}" class="btn btn-warning">Add Profile </a>
+     <p></p>
+    <div class="row">
+        <!-- Add pagination logic here -->
+        {% for profile in profiles %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img class="card-img-top" src="{{ profile.profile_pic.url }}" alt="Profile picture" width="80" height="300">
+                <div class="card-body">
+                    <h5 class="card-title">{{ profile.name }} </h5>
+                    <p class="card-text">
+                        <i class="fas fa-briefcase"></i> {{ profile.occupation }}<br>
+                        <i class="fas fa-map-marker-alt"></i> {{ profile.location }}
+                    </p>
+                    <a href="{% url 'app:profile_detail' profile.id %}" class="btn btn-primary">View Profile</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <!-- Add pagination links here -->
+    {% if profiles|length == 0 %}
+    <div class="alert alert-info mt-4">
+        No profiles found.
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+

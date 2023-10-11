@@ -1,0 +1,77 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4">
+            <img src="{{ profile_obj.profile_pic.url }}" class= "rounded mx-auto d-block" alt="Profile picture">
+        </div>   
+        <div class="col-md-8">
+            <h2>{{ profile_obj.name }}</h2>
+            <p class="text-muted">{{ profile_obj.age }} years old</p>
+            <p>{{ profile.bio }}</p>
+            <hr>
+            <h3>Additional Information</h3>
+            <ul class="list-group">
+                <li class="list-group-item"><strong>Occupation:</strong> {{ profile_obj.occupation }}</li>
+                <li class="list-group-item"><strong>Date of Birth:</strong> {{ profile_obj.date_of_birth }}</li>
+                <li class="list-group-item"><strong>Marital Status:</strong> {{ profile_obj.is_married|yesno:"Married,Single" }}</li>
+                <li class="list-group-item"><strong>Email:</strong> {{ profile_obj.email }}</li>
+                <li class="list-group-item"><strong>Hobbies:</strong> 
+                    <ul>
+                        {% for hobby in profile_obj.hobbies.all %}
+                        <li>{{ hobby }}</li>
+                        {% endfor %}
+
+                    </ul>
+
+                <li class="list-group-item"><strong>Religion:</strong> {{ profile_obj.religion }}</li>
+                <li class="list-group-item"><strong>Caste:</strong> {{ profile_obj.caste }}</li>
+                <li class="list-group-item"><strong>Sect:</strong> {{ profile_obj.sect}}</li>
+                <li class="list-group-item"><strong>Father's Name:</strong> {{ profile_obj.father.name }}</li>
+                <li class="list-group-item"><strong>Father's occupation:</strong> {{ profile_obj.father.occupation }}</li>
+
+
+
+
+
+
+            </ul>
+            <hr>
+            <div class="d-flex justify-content-between">
+                <a href="{% url 'app:profile_list' %}" class="btn btn-primary">Back</a>
+                <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Profile Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this profile? This action cannot be undone.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <a href="{% url 'app:profile_delete' profile_obj.id %}" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Add custom CSS styles here */
+    .mt-5 {
+        margin-top: 3rem;
+    }
+    /* Customize additional styles as needed */
+</style>
+{% endblock %}
