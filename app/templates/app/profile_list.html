@@ -2,16 +2,17 @@
 {% load static %}
 {% block content %}
 
-
 <div class="container">
-    <a href="{% url 'app:new_profile'  %}" class="btn btn-warning">Add Profile </a>
-     <p></p>
+    <a href="{% url 'app:new_profile' %}" class="btn btn-warning">Add Profile</a>
+    <p></p>
+
     <div class="row">
+
         <!-- Add pagination logic here -->
         {% for profile in profiles %}
         <div class="col-md-4 mb-4">
             <div class="card">
-                <img class="card-img-top" src="{{ profile.profile_pic.url }}" alt="Profile picture" width="80" height="300">
+                <img class="card-img-top" src="{{ profile_obj.profile_pic.url }}" alt="Profile picture" width="80" height="300">
                 <div class="card-body">
                     <h5 class="card-title">{{ profile.name }} </h5>
                     <p class="card-text">

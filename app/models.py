@@ -3,6 +3,7 @@ from django.db import models
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
 
+
 fs = FileSystemStorage(location=settings.MEDIA_ROOT)
 
 # Create your models here.
@@ -75,17 +76,15 @@ class profile(models.Model):
         
 
 
-
-    
-
-
-    
-    
-
-    
-        
-
     def __str__(self):
         return self.name
 
+
+# class CustomUser(AbstractUser):
+#     GENDER_CHOICES = [
+#         ('M', 'Male'),
+#         ('F', 'Female')
+#     ]
+
+#     gender = models.CharField(max_length=1,choices=GENDER_CHOICES)
 

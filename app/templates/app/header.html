@@ -9,7 +9,16 @@
         <a class="nav-link" href="{% url 'app:profile_list' %}">Home</a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="{% url 'password_change' %}">Change Password</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'app:delete' %}">Delete account</a>
+  </li>
+   
+      <li class="nav-item">
         <a class="nav-link" href="{% url 'app:contact' %}">Contact Us</a>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'app:logout' %}">Logout</a>
       </li>
     </ul>
   </div>

@@ -5,17 +5,20 @@
 <style>
     form {
         margin-bottom: 40px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #f6f6f6;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+        width: 100%;    
     }
+    
 </style>
 
 <h1>Add a New Profile!</h1>
     <form method="post" enctype="multipart/form-data">
-
+        {{ form.as_p }}
         {% csrf_token %}
-        <!-- {{ formset.management_form }} -->
-        <!-- {% for form in formset %} -->
-            {{ formset.as_p }}
-        {% endfor %}
         <input type="submit" class="btn btn-primary" value="Submit">
     </form>
 {% endblock %}

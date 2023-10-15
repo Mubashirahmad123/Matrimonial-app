@@ -1,0 +1,26 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    main{
+        margin-bottom: 40px;
+        
+    }
+    
+</style>
+
+<h1>Register Account </h1>
+    <form method="post" >
+
+{% csrf_token %}
+
+{{ form.as_p }}
+
+        <button type ="submit" class="btn btn-primary" > Register</button>
+    </form>
+
+    <p>Already Registered</p>
+    <a href="{% url 'app:login' %}">Login Here</a>
+
+{% endblock %}

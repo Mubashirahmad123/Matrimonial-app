@@ -9,5 +9,13 @@ urlpatterns = [
     path('<int:profile_id>', views.ProfileDetailView, name='profile_detail'),
     path('<int:profile_id>/delete', views.ProfileDeleteView, name='profile_delete'),
     path('Contact', views.ContactView, name='contact'),
-    path('new_profile', views.NewProfileView, name='new_profile'),
+    path('new_profile/', views.NewProfileView, name='new_profile'),
+    path('register/', views.register, name='register'),
+    path('login/', views.login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
+    path('delete/', views.delete_view, name='delete'),
+
+
+
+
 ]

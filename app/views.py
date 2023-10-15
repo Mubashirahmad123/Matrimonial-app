@@ -2,7 +2,12 @@ from django.shortcuts import render,get_object_or_404,redirect
 from .models import profile
 from .forms import ContactForm, ProfileForm  # Use "ProfileForm" instead of "profileForm"
 from django.forms import formset_factory
-
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import login, authenticate
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required 
+from .forms import RegistrationForm
+from django.contrib import messages
 
 
 
@@ -49,48 +54,101 @@ def ContactView(request):
 
 
 # def NewProfileView(request):
+
 #     if request.method == 'POST':
-#         form = ProfileForm(request.POST)
+
+#         form = ProfileForm(request.POST, request.FILES)
+
 #         if form.is_valid():
-#             # Save the form data and create a new profile
-#             profile_obj = form.save()
-#             # Optionally, you can redirect to a success page or do something else here.
+
+#             form.save()
+
+
+
+
+#             return redirect('app:profile_list')
+
+
+
 #     else:
 #         form = ProfileForm()
  
 #     return render(request, 'app/new_profile.html', {'form': form})
 
 
-
+@login_required
 def NewProfileView(request):
 
-    profile_formset= formset_factory(ProfileForm, extra=1)
-
     if request.method == 'POST':
-        formset = profile_formset(request.POST, request.FILES)
-        
-        if formset.is_valid():
-            for form in formset:
-                if form.has_changed():
-                    form.save()
+        print("Hlo")
+        form = ProfileForm(request.POST, request.FILES)
+        print("Hii")
 
-            return redirect ('app:profile_list')
+        if form.is_valid():
+            print("Worked")
+
+            form.save()
+
+
+            return redirect('app:profile_list')
+        
     else:
-        formset = profile_formset()
-        print('test---', formset)
+        form = ProfileForm()
+
+    return render(request, 'app/new_profile.html', {'form':form})
 
 
-    context = {
-        'formset': formset,
-    }
+
+
+
+
+
+def register(request):
+    if request.method =='POST':
+        form =  RegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('app:login')
+    else:
+        form = RegistrationForm()
+
+    return render(request, 'app/register.html', {'form':form})
+
+
         
 
+
+
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('app:profile_list')  
+        
+
+    else:
+        form = AuthenticationForm()
+
+    return render(request, 'app/login.html', {'form': form})
+
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('app:login')
+
+
+
+
+def delete_view(request):
+    request.user.delete()
+    messages.success(request, 'Your accoyunt Has Been Deleted ')
     
-    return render (request, 'app/new_profile.html', context )
+    return redirect('app:login')
 
 
 
-
-    
 
 

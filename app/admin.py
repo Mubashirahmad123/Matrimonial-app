@@ -35,3 +35,5 @@ admin.site.register(Hobby, HobbyAdmin)
 
 
 
+
+
