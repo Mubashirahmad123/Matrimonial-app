@@ -8,7 +8,10 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required 
 from .forms import RegistrationForm
 from django.contrib import messages
-
+# import uuid
+# from django.contrib.sites.shortcuts import get_current_site
+# from .models import CustomUser
+# from django.http import HttpResponse
 
 
 
@@ -108,6 +111,18 @@ def register(request):
         form =  RegistrationForm(request.POST)
         if form.is_valid():
             form.save()
+            # user = form.save(commit=False)
+            # user.is_email_verified = False
+            # user.email_verification_token = str(uuid.uuid4())
+            # user.save()
+
+            # current_site = get_current_site(request)
+            # mail_subject = 'Activate your account'
+            # activation_link = f"http://{current_site}/app/verify_email/{ user.email_verification_token }/"
+            # message =f"Click the link to activate your account: { activation_link}"
+            # send_mail( mail_subject,message, 'magicfix@gmail.com', [user.email])
+
+
             return redirect('app:login')
     else:
         form = RegistrationForm()
@@ -115,7 +130,21 @@ def register(request):
     return render(request, 'app/register.html', {'form':form})
 
 
-        
+# def verify_email_view(request, token):
+#     try:
+       
+#        user = CustomUser.objects.get(email_verification_token=token)
+#        if user:
+#            user.is_email_verified = True
+#            user.email_verification_token = None
+#            user.save()
+           
+#            return redirect('app:login')
+           
+#     except:
+#         return HttpResponse('Activation link is invalid  ')
+    
+
 
 
 
@@ -124,9 +153,13 @@ def login_view(request):
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
             user = form.get_user()
+            # if user.is_email_verified:
             login(request, user)
             return redirect('app:profile_list')  
         
+            # else:
+                # messages.error(request, "Please verify  your email")
+                # return redirect ('App:login')
 
     else:
         form = AuthenticationForm()
@@ -144,7 +177,7 @@ def logout_view(request):
 
 def delete_view(request):
     request.user.delete()
-    messages.success(request, 'Your accoyunt Has Been Deleted ')
+    messages.success(request, 'Your account Has Been Deleted ')
     
     return redirect('app:login')
 

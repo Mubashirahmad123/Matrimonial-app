@@ -35,14 +35,7 @@ urlpatterns = [
 
     path('', include('app.urls')),
 
-    #password_change
-    #password_change_done
-
-    #password_reset
-    #password_reset_done
-    #password_reset_confirm
-    #password_reset_complete
-
+   
     # static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
 ]
 

@@ -1,7 +1,10 @@
-from collections.abc import Iterable
+# from collections.abc import Iterable
 from django.db import models
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
+# from django.contrib.auth.models import AbstractUser  # Import AbstractUser
+
+
 
 
 fs = FileSystemStorage(location=settings.MEDIA_ROOT)
@@ -81,10 +84,15 @@ class profile(models.Model):
 
 
 # class CustomUser(AbstractUser):
-#     GENDER_CHOICES = [
-#         ('M', 'Male'),
-#         ('F', 'Female')
-#     ]
+#     # GENDER_CHOICES = [
+#     #     ('M', 'Male'),
+#     #     ('F', 'Female')
+#     # ]
 
-#     gender = models.CharField(max_length=1,choices=GENDER_CHOICES)
+#     # gender = models.CharField(max_length=1,choices=GENDER_CHOICES)
 
+
+
+    # is_email_verified = models.BooleanField(default=False)
+
+    # email_verification_token = models.CharField(max_length=200, blank=True, null=True)

@@ -153,6 +153,23 @@ MEDIA_URL='/media/'
 
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.email.EmailBackend'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
+EMAIL_HOST = 'smtp.mailgun.org'
+
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_USE_SSL = False
+EMAIL_HOST_PASSWORD = '09f9727b7f8774e86ac878c73a16cc67-5465e583-f3f808b0'
+EMAIL_HOST_USER = ' postmaster@sandbox6cfd1acb54ab4196b1d7c891cf9c4e6c.mailgun.org'
+
+
+
+
+
 
 
