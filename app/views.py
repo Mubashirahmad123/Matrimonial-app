@@ -1,6 +1,6 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from .models import profile
-from .forms import ContactForm, ProfileForm  # Use "ProfileForm" instead of "profileForm"
+from .forms import ContactForm, ProfileForm  
 from django.forms import formset_factory
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate
@@ -29,11 +29,81 @@ def ProfileDetailView(request, profile_id):
     profile_obj = get_object_or_404(profile, id=profile_id)
     return render(request, 'app/profile_detail.html', {'profile_obj': profile_obj})
 
+
+
 def ProfileDeleteView(request, profile_id):
     profile_to_delete = get_object_or_404(profile, id=profile_id)
     profile_to_delete.delete()
     profiles = profile.objects.all()
     return render(request, 'app/profile_list.html', {'profiles': profiles})
+
+
+# def ProfileDeleteView(request, profile_id):
+#     profile_to_delete = get_object_or_404(profile, id=profile_id)
+#     profile_to_delete.delete()
+#     profiles = profile.objects.all()
+#     return render(request, 'app/profile_list.html', {'profiles': profiles})
+
+
+# def ProfileDeleteView(request, profile_id):
+#     if request.method == 'POST':
+#         profile_to_delete = get_object_or_404(profile, id=profile_id)
+#         profile_to_delete.delete()
+#         messages.success(request, 'Profile deleted successfully.')
+#         return redirect('app:profile_list')
+#     else:
+#         # Handle GET request (may not be necessary)
+#         return redirect('app:profile_list')
+    
+
+
+# def ProfileDeleteView(request, profile_id):
+#     if request.method == 'POST':
+#         print("Hlo")
+#         profile_to_delete = get_object_or_404(profile, id=profile_id)
+#         print("hii")
+#         profile_to_delete.delete()
+#         print("HELlo")
+#         messages.success(request, 'Profile deleted successfully.')
+#         print("Thanks")
+#         return redirect('app:profile_list')
+#     else:
+#         # Handle GET request (may not be necessary)
+#         return redirect('app:profile_list')
+
+
+
+
+# def ProfileDeleteView(request, profile_id):
+#     if request.method == 'POST':
+#         try:
+#             profile_to_delete = get_object_or_404(profile, id=profile_id)
+#             profile_to_delete.delete()
+#             messages.success(request, 'Profile deleted successfully.')
+#             return redirect('app:profile_list')
+#         except Exception as e:
+#             print(f"Error deleting profile: {e}")
+#             # Add more detailed error handling here if needed
+#     else:
+#         # Handle GET request (may not be necessary)
+#         return redirect('app:profile_list')
+
+
+
+
+
+
+# def ProfileDeleteConfirmationView(request, profile_id):
+#     print("Hlo")
+#     profile_obj = get_object_or_404(profile, id=profile_id)
+#     print("hii")
+#     return render(request, 'app/profile_delete_confirmation.html', {'profile_obj': profile_obj})
+
+
+
+
+
+
 
 def ContactView(request):
     
