@@ -1,0 +1,5 @@
+{% for message in received_messages %}
+    <p>From: {{ message.sender }}</p>
+    <p>{{ message.message }}</p>
+    <hr>
+{% endfor %}

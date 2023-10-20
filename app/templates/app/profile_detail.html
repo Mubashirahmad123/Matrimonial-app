@@ -1,10 +1,10 @@
-{% extends 'app/base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 {% block content %}
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-4">
-            <img src="{{ profile.profile_pic.url }}" class= "rounded mx-auto d-block" alt="Profile picture">
+            <img src="{{ profile.profile_obj_pic.url }}" class= "rounded mx-auto d-block" alt="Profile picture">
         </div>   
         <div class="col-md-8">
             <h2>{{ profile_obj.name }}</h2>
@@ -30,11 +30,6 @@
                 <li class="list-group-item"><strong>Sect:</strong> {{ profile_obj.sect}}</li>
                 <li class="list-group-item"><strong>Father's Name:</strong> {{ profile_obj.father.name }}</li>
                 <li class="list-group-item"><strong>Father's occupation:</strong> {{ profile_obj.father.occupation }}</li>
-
-
-
-
-
 
             </ul>
             <hr>
@@ -66,17 +61,17 @@
         </div>
     </div>
 </div>
-
-<style>
-    /* Add custom CSS styles here */
-    .mt-5 {
-        margin-top: 3rem;
-    }
-
-    
-     
-
-    
-    /* Customize additional styles as needed */
-</style>
 {% endblock %}
+
+
+Display notifications
+<div class="notifications">
+    <h3>Notifications</h3>
+    <ul>
+        {% for notification in notifications %}
+            <li>{{ notification.actor }} {{ notification.verb }}.</li>
+        {% endfor %}
+    </ul>
+</div> 
+
+

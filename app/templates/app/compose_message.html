@@ -1,0 +1,30 @@
+{% extends 'base.html' %} 
+{% load static %} 
+
+{% block content %}
+<h1>Compose a Message</h1>
+
+
+<form method="post">
+    {% csrf_token %}
+
+    <label for="message_content"></label>
+    <textarea id="message_content" name="content">{{ form.content.value }}</textarea>
+    
+    {{ form.content.label_tag }}
+    {{ form.content }}
+    <button type="submit" class="btn btn-primary">Send</button>
+</form>
+
+<p></p>
+
+{% for message in messages %}
+<p class="alert alert-success">{{ message }}</p>
+{% endfor %}
+
+<p></p>
+
+<a href="{% url 'app:profile_list' %}" class="btn btn-primary">Back to Profile</a>
+
+
+{% endblock %}

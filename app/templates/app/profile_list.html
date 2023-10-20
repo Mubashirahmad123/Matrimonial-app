@@ -1,4 +1,4 @@
-{% extends 'app/base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 {% block content %}
 
@@ -12,7 +12,7 @@
         {% for profile in profiles %}
         <div class="col-md-4 mb-4">
             <div class="card">
-                <img class="card-img-top" src="{{ profile_obj.profile_pic.url }}" alt="Profile picture" width="80" height="300">
+                <img class="card-img-top" src="{{ profile.profile_obj_pic.url }}" alt="Profile picture" width="80" height="300">
                 <div class="card-body">
                     <h5 class="card-title">{{ profile.name }} </h5>
                     <p class="card-text">
@@ -20,6 +20,9 @@
                         <i class="fas fa-map-marker-alt"></i> {{ profile.location }}
                     </p>
                     <a href="{% url 'app:profile_detail' profile.id %}" class="btn btn-primary">View Profile</a>
+                    <a href="{% url 'app:compose_message' receiver_id=profile.id %}" class="btn btn-primary"> Message</a>
+
+                    
                 </div>
             </div>
         </div>

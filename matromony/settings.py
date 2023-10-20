@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
+    'debug_toolbar',
+
 ]
 
 MIDDLEWARE = [
@@ -52,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 
 ]
 
@@ -133,6 +136,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS =[
+    BASE_DIR / "static",
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -171,5 +177,15 @@ EMAIL_HOST_USER = ' postmaster@sandbox6cfd1acb54ab4196b1d7c891cf9c4e6c.mailgun.o
 
 
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+    # Add any additional directories for your static files
+]
 
 
+
+INTERNAL_IPS = [
+    'localhost'
+    "127.0.0.1",
+
+]

@@ -8,11 +8,12 @@
     <title>Matrimonial App</title>
     <!-- Load Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}"> -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}">
 
 </head>
-<body>
-    {% include 'app/header.html' %}
+<body id="bg" style="background-image: url('{% static 'images/banner.jpg' %}');">
+
+    {% include 'header.html' %}
 
     <p></p>
     
@@ -20,10 +21,9 @@
         {% block content %}{% endblock %}
     </main>
 
-    {% include 'app/footer.html' %}
+    {% include 'footer.html' %}
     
     <!-- Load Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

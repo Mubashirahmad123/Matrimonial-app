@@ -1,5 +1,5 @@
 from django.urls import path
-from .import views
+from . import views
 
 
 app_name = 'app'
@@ -16,6 +16,14 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     path('delete/', views.delete_view, name='delete'),
     # path('verify_email/<str:token>', views.verify_email_view, name='verify_email'),
+
+    # path('compose_message/', views.ComposeMessageView, name='compose_message'),
+    path('compose_message/<int:receiver_id>/', views.ComposeMessageView, name='compose_message'),
+
+    path('send_message/<int:receiver_id>/', views.send_message, name='send_message'),
+    path('message_history/<int:receiver_id>/', views.message_history, name='message_history'),
+    path('message_inbox/', views.MessageRetrievalView, name='message_inbox'),
+
 
 
 

@@ -11,7 +11,19 @@ from django.contrib import messages
 # import uuid
 # from django.contrib.sites.shortcuts import get_current_site
 # from .models import CustomUser
-# from django.http import HttpResponse
+from django.http import HttpResponse
+from django.http import JsonResponse
+from .models import Message
+from .forms import MessageForm  # Create this form in your forms.py file
+# from django import models
+from django.urls import reverse
+from django.contrib.auth.models import User  # Import the User model
+from django.db import models  # Correct import
+from django.db.models import Q
+# from notifications.models import Notification
+
+
+
 
 
 
@@ -20,17 +32,27 @@ from django.contrib import messages
 
 def ProfileListView(request):
     profiles = profile.objects.all()
+
     return render(request, 'app/profile_list.html',{'profiles':profiles})
 
 
-
+@login_required
 def ProfileDetailView(request, profile_id):
     # Use get_object_or_404 to retrieve the profile
     profile_obj = get_object_or_404(profile, id=profile_id)
-    return render(request, 'app/profile_detail.html', {'profile_obj': profile_obj})
+    
 
 
+    send_message_url = reverse('app:send_message', args=[profile_obj.id])
 
+
+    # Retrieve notifications for the currently logged-in user
+    # notifications = Notification.objects.filter(recipient=request.user)
+
+    return render(request, 'app/profile_detail.html', {'profile_obj': profile_obj,'send_message_url':send_message_url})
+
+
+@login_required
 def ProfileDeleteView(request, profile_id):
     profile_to_delete = get_object_or_404(profile, id=profile_id)
     profile_to_delete.delete()
@@ -163,6 +185,7 @@ def NewProfileView(request):
             form.save()
 
 
+
             return redirect('app:profile_list')
         
     else:
@@ -239,8 +262,10 @@ def login_view(request):
 
 
 def logout_view(request):
-    logout(request)
-    return redirect('app:login')
+    logout (request)
+    if request.method == "POST":
+        return JsonResponse({'success': True})
+    return redirect ('app:login')
 
 
 
@@ -254,4 +279,129 @@ def delete_view(request):
 
 
 
+
+@login_required
+def send_message(request, receiver_id):
+    receiver = get_object_or_404(User, id=receiver_id)
+    print("######")
+    
+    if request.method == 'POST':
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            new_message = form.save(commit=False)
+            new_message.sender = request.user
+            new_message.receiver = receiver  # Set the receiver
+            new_message.save()
+            messages.success(request, 'Message sent successfully!')
+
+            return redirect('view_profile', receiver_id)
+    else:
+        form = MessageForm()
+    return render(request, 'app/compose_message.html', {'form': form})
+
+
+# @login_required
+# def MessageRetrievalView(request):
+#     received_messages = Message.objects.filter(receiver=request.user).order_by('-timestamp')
+#     return render(request, 'app/message_inbox.html', {'received_messages': received_messages})
+
+
+# @login_required
+# def MessageRetrievalView(request):
+#     if request.user.is_authenticated:
+#         print("User is authenticated:", request.user)
+#     else:
+#         print("User is not authenticated:", request.user)
+
+#     received_messages = Message.objects.filter(receiver=request.user).order_by('-timestamp')
+#     return render(request, 'app/message_inbox.html', {'received_messages': received_messages})
+
+
+
+# @login_required
+# def MessageRetrievalView(request):
+#     if request.user.is_authenticated:
+#         print("User is authenticated:", request.user)
+
+#         received_messages = Message.objects.get(receiver=request.user).order_by('-timestamp')
+
+#         return render(request, 'app/message_inbox.html', {'received_messages': received_messages})
+#     else:
+#         # Handle the case when the user is not authenticated, e.g., redirect to a login page.
+#         # You can customize this part based on your application's requirements.
+#         return HttpResponse("Please log in to access your messages.")
+
+
+def MessageRetrievalView(request):
+    if request.user.is_authenticated:
+        print("User is authenticated:", request.user)
+        print("User type:", type(request.user))  # Debug statement
+        received_messages = Message.objects.filter(receiver=request.user ).order_by('-timestamp')
+        return render(request, 'app/message_inbox.html', {'received_messages': received_messages})
+    else:
+        return HttpResponse("Please log in to access your messages.")
+
+
+
+
+
+
+
+
+@login_required
+def message_history(request, receiver_id):
+    # Get message history between the logged-in user and the receiver
+    messages = Message.objects.filter(
+        (models.Q(sender=request.user, receiver_id=receiver_id) |
+         models.Q(sender_id=receiver_id, receiver=request.user))
+    ).order_by('timestamp')
+
+    return render(request, 'app/message_history.html', {'messages': messages})
+
+@login_required
+def ComposeMessageView(request, receiver_id ):
+    if request.method == 'POST':
+        print("hlo")
+
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            print("tyyu")
+            new_message = form.save(commit=False)
+            print("niii")
+            new_message.sender = request.user
+            print("work")
+            new_message.receiver = get_object_or_404(User, id=receiver_id )  # Include the receiver
+            print("worked")
+            new_message.save()
+            return redirect('message_history', receiver_id=receiver_id)  # Specify the correct view name to redirect to
+    else:
+        form = MessageForm()
+    return render(request, 'app/compose_message.html', {'form': form})
+
+
+# @login_required
+# def SendMessageView(request, receiver_id):
+#     receiver = get_object_or_404(User, id=receiver_id)
+
+#     if request.method == 'POST':
+#         form = MessageForm(request.POST)
+#         if form.is_valid():
+#             message = form.save(commit=False)
+#             message.sender = request.user
+#             message.receiver = receiver
+#             message.save()
+#             messages.success(request, 'Message sent successfully!')
+#             return redirect(reverse('app:profile_detail', args=[receiver.profile.id]))
+
+#     form = MessageForm()
+#     return render(request, 'app/compose_message.html', {'form': form, 'receiver': receiver})
+
+# @login_required
+# def MessageHistoryView(request, receiver_id):
+#     receiver = get_object_or_404(User, id=receiver_id)
+#     messages_received = Message.objects.filter(sender=receiver, receiver=request.user)
+#     messages_sent = Message.objects.filter(sender=request.user, receiver=receiver)
+#     messages = (messages_received | messages_sent).order_by('timestamp')
+
+#     return render(request, 'app/message_history.html', {'messages': messages, 'receiver': receiver})
 
