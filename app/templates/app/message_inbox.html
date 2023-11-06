@@ -1,5 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% load static %}
+
 {% for message in received_messages %}
     <p>From: {{ message.sender }}</p>
     <p>{{ message.message }}</p>
     <hr>
 {% endfor %}
+{% endblock %}
+
+

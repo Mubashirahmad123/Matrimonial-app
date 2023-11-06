@@ -8,11 +8,7 @@
 <form method="post">
     {% csrf_token %}
 
-    <label for="message_content"></label>
-    <textarea id="message_content" name="content">{{ form.content.value }}</textarea>
-    
-    {{ form.content.label_tag }}
-    {{ form.content }}
+    {{form.as_p}}
     <button type="submit" class="btn btn-primary">Send</button>
 </form>
 

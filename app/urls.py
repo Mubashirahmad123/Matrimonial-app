@@ -5,12 +5,14 @@ from . import views
 app_name = 'app'
 
 urlpatterns = [
-    path('', views.ProfileListView, name = 'profile_list'),
-    path('<int:profile_id>', views.ProfileDetailView, name='profile_detail'),
-    path('<int:profile_id>/delete', views.ProfileDeleteView, name='profile_delete'),
+    path('new_profile/', views.NewProfileView, name='new_profile'), #CREATE
+    path('', views.ProfileListView, name = 'profile_list'), #READ
+    path('<int:profile_id>/profile_detail/', views.ProfileDetailView, name='profile_detail'), #READ
+    path('<int:profile_id>/update', views.ProfileUpdateView, name='profile_update'), #UPDATE
+    path('<int:profile_id>/delete', views.ProfileDeleteView, name='profile_delete'), #DELETE
+
 
     path('Contact', views.ContactView, name='contact'),
-    path('new_profile/', views.NewProfileView, name='new_profile'),
     path('register/', views.register, name='register'),
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
@@ -24,10 +26,6 @@ urlpatterns = [
     path('message_history/<int:receiver_id>/', views.message_history, name='message_history'),
     path('message_inbox/', views.MessageRetrievalView, name='message_inbox'),
 
-
-
-
-
-
-
 ]
+
+

@@ -11,9 +11,21 @@
 
 
 
-  .custom-margin {
-    margin-left: 20px; /* Adjust the value as needed */
-  }
 
   
 
+  #logged-in {
+    position: relative;
+    left: -70px;
+    top: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    text-shadow: 1px 1px 1px #000000;
+    background-color: rgba(0, 0, 0, 0.5);
+    
+
+    
+  }
+  

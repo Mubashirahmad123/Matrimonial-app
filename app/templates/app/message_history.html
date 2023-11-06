@@ -10,6 +10,7 @@
     </li>
     {% endfor %}
 </ul>
-<a href="{% url 'view_profile' receiver_id %}">Back to Profile</a>
-<a href="{% url 'send_message' receiver_id %}">Compose a New Message</a>
+<a href="{% url 'app:profile_detail' 2 %}">Back to Profile</a>
+
+<a href="{% url 'app:send_message' 2 %}">Compose a New Message</a>
 {% endblock %}

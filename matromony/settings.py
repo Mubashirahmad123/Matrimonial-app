@@ -185,7 +185,7 @@ STATICFILES_DIRS = [
 
 
 INTERNAL_IPS = [
-    'localhost'
+    #'localhost'
     "127.0.0.1",
 
 ]
