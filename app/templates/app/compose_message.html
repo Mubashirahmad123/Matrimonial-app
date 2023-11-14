@@ -2,25 +2,31 @@
 {% load static %} 
 
 {% block content %}
-<h1>Compose a Message</h1>
+  <h1>Compose a Message</h1>
 
-
-<form method="post">
+  <form method="post">
     {% csrf_token %}
+    
+    <div class="form-group">
+      <label for="{{ form.subject.id_for_label }}">Subject:</label>
+      {{ form.subject }}
+    </div>
 
-    {{form.as_p}}
+    <div class="form-group">
+      <label for="{{ form.message.id_for_label }}">Message:</label>
+      {{ form.message }}
+    </div>
+
     <button type="submit" class="btn btn-primary">Send</button>
-</form>
+  </form>
 
-<p></p>
+  <p></p>
 
-{% for message in messages %}
-<p class="alert alert-success">{{ message }}</p>
-{% endfor %}
+  {% for message in messages %}
+    <p class="alert alert-success">{{ message }}</p>
+  {% endfor %}
 
-<p></p>
+  <p></p>
 
-<a href="{% url 'app:profile_list' %}" class="btn btn-primary">Back to Profile</a>
-
-
+  <a href="{% url 'app:profile_list' %}" class="btn btn-primary">Back to Profile</a>
 {% endblock %}

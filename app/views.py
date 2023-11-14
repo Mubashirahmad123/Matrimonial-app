@@ -68,6 +68,8 @@ def ProfileListView(request):
 def ProfileDetailView(request, profile_id):
     # Use get_object_or_404 to retrieve the profile
     profile_obj = get_object_or_404(profile, id=profile_id)
+    print(f"Profile Picture URL: {profile_obj.profile_pic.url}")
+
     
 
 
@@ -239,7 +241,7 @@ def delete_view(request):
 @login_required
 def send_message(request, receiver_id):
     receiver = get_object_or_404(User, id=receiver_id)
-    current_profile = get_object_or_404(profile, user=request.user)
+    current_profile = get_object_or_404(profile, id=receiver_id)
 
     print("######")
     
@@ -248,10 +250,13 @@ def send_message(request, receiver_id):
         if form.is_valid():
             print("valid")
             new_message = form.save(commit=False)
+            print("seen")
             new_message = Message(sender=current_profile, receiver_id=receiver_id, subject='Your subject', message='Your message')
             new_message.save()
+            print("push")
 
             new_message.sender = request.user.profile
+            print("meet")
             new_message.receiver = receiver  # Set the receiver
             new_message.save()
             print("SEND")
@@ -285,10 +290,11 @@ def MessageRetrievalView(request):
         # user = request.user.id  # Get the user ID
         # print(f"UserID:{user}")
         received_messages = Message.objects.all().order_by('-timestamp')
-        print("howdy")
+        print("holly")
 
         # received_messages = Message.objects.filter(receiver=user).order_by('-timestamp')
         return render(request, 'app/message_inbox.html', {'received_messages': received_messages})
+        print("finer")
     else:
         return HttpResponse("Please log in to access your messages.")
 

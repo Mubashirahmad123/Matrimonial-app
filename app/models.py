@@ -55,12 +55,17 @@ class FatherProfile(models.Model):
 
 
 
+
+
+
 class profile(models.Model):
     name = models.CharField(max_length=100)
     GENDER_CHOICES=[
         ('M','Male'),
         ('F','Female')
     ]
+    user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
+
     profile_pic=models.ImageField(null=True, blank=True)
     email = models.EmailField(max_length=200,unique=True)
     age=models.IntegerField()
