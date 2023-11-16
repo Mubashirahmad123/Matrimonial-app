@@ -29,6 +29,12 @@ from django.db.models import Q
 
 #CREATE VIEW
 
+def homeView(request):
+    return render(request, 'app/home.html')
+
+
+
+
 @login_required
 def NewProfileView(request):
 

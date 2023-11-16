@@ -1,0 +1,299 @@
+body {
+  background-color: wheat;
+}
+* {
+  margin: 0;
+  font-family: Arial;
+  border: border-box;
+}
+
+/* Style the navigation bar */
+.navbar {
+  height: 40px;
+  width: 100%;
+  background-color: indianred;
+
+  padding: 8px;
+
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+}
+
+* {
+  box-sizing: border-box;
+}
+/* end nav bar */
+
+/* h2 */
+
+h2 {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  text-align: center;
+  color: #007185;
+  font-family: fantasy;
+}
+/* end h2 */
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+  padding: 8px;
+  flex-wrap: wrap;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+  background-size: cover;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 10px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Caption text */
+.text {
+  color: black;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+.img {
+  height: 400px !important;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active,
+.dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  animation-name: none;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/*** card section ***/
+
+/* Style for the flip card container */
+.flip-card-container {
+  display: flex;
+  justify-content: center; /* Adjust this based on your layout preferences */
+  align-items: center;
+  margin-top: 20px; /* Adjust the margin as needed */
+  padding: 10px;
+}
+
+.flip-card {
+  align-items: end;
+  background-color: transparent;
+  width: 300px;
+  height: 200px;
+  margin-right: 10px;
+  border: 1px solid #f1f1f1;
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Position the front and back side */
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+/* Style the front side (fallback if image is missing) */
+.flip-card-front {
+  background-color: #bbb;
+  color: black;
+}
+
+/* Style the back side */
+.flip-card-back {
+  background-color:blue;
+  color: white;
+  transform: rotateY(180deg);
+}
+
+/*****end card section*****/
+
+/*** hero section ***/
+
+.hero-section {
+  height: 100px;
+  margin-top: 20px;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  min-height: calc(40vh - (var(--header) * 2));
+  padding-top: var(--header);
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  border-bottom: solid thin rgba(6, 11, 17, 0.2);
+  box-shadow: inset 0 -0.5em 1em rgb(0 0);
+  transition: 0.5s ease all;
+  text-align: left;
+  /* filter: brightness(.8);*/
+}
+
+.hero-message {
+  background-color: white;
+  color: black;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.85rem;
+  width: 80%;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.hero-message a {
+  color: #007185;
+}
+/*** end hero section ***/
+
+/*** Footer section ***/
+
+footer {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.foot-panel4 {
+  background-color: red;
+  color: #dddddd;
+  height: 80px;
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.pages {
+  padding-top: 25px;
+}
+
+.foot-panel1 {
+  background-color: #37475a;
+  color: white;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+}
+
+.foot-panel2 {
+  background-color: #232f3e;
+  color: #ffffff;
+  height: 250px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+ul {
+  margin-top: 25px;
+}
+
+ul a {
+  display: block;
+  font-size: 0.85rem;
+  color: #dddddd;
+  margin-top: 10px;
+}
+
+.foot-panel3 {
+  background-color: #232f3e;
+  border-top: 0.5px solid white;
+  height: 70px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.copyright {
+  padding-top: 5px;
+  font-size: 0.65rem;
+  color: #9b9b9b;
+}
+/* end footer section */
