@@ -33,10 +33,19 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" href="">{{request.user}}</a>
         <div class="dropdown-menu" >
+
         <a class="dropdown-item" href="{% url 'app:message_inbox' %}">Inbox</a>
         <a class="dropdown-item"  id='logout-btn' href="#">Logout</a>
         <a class="dropdown-item" href="{% url 'app:delete' %}">Delete account</a>
         <a class="dropdown-item" href="{% url 'password_change' %}">PasswordChange</a>
+
+
+
+
+
+
+
+
 
         </div>
       </li>

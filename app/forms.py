@@ -23,7 +23,7 @@ class ProfileForm(forms.ModelForm):
         fields = "__all__"
 
         # fields = ['name', 'age', 'gender', 'occupation']
-        exclude=[ 'date_of_birth', 
+        exclude=[ 'date_of_birth', 'user',
                  ]
 
 

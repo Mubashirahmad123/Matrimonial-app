@@ -75,6 +75,8 @@ def ProfileDetailView(request, profile_id):
     # Use get_object_or_404 to retrieve the profile
     profile_obj = get_object_or_404(profile, id=profile_id)
     print(f"Profile Picture URL: {profile_obj.profile_pic.url}")
+    print(f"Profile ID: {profile_id}")
+
 
     
 
@@ -207,6 +209,7 @@ def login_view(request):
             user = form.get_user()
             # if user.is_email_verified:
             login(request, user)
+            print("tillu")
             return redirect('app:profile_list')  
         
             # else:

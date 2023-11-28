@@ -5,7 +5,7 @@ from . import views
 app_name = 'app'
 
 urlpatterns = [
-    # path('', views.homeView, name='home'),
+    path('', views.homeView, name='home'),
 
     path('new_profile/', views.NewProfileView, name='new_profile'), #CREATE
     path('', views.ProfileListView, name = 'profile_list'), #READ

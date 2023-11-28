@@ -9,7 +9,10 @@
 
   </ul>
 
-
+        <div>
         <a href="{% url 'app:compose_message' receiver_id %}">Compose a New Message</a>
+          <br>
+        <a href="{% url 'app:profile_list' %}" class="btn btn-primary ">Back</a>
+        </div>
 
 {% endblock %}
