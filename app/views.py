@@ -30,7 +30,9 @@ from django.db.models import Q
 #CREATE VIEW
 
 def homeView(request):
+    print("Shiii")
     return render(request, 'app/home.html')
+
 
 
 
@@ -66,20 +68,21 @@ def NewProfileView(request):
 def ProfileListView(request):
     profiles = profile.objects.all()
 
-    return render(request, 'app/profile_list.html',{'profiles':profiles})
+    return render(request, 'app/profile_list.html',{'profiles': profiles})
 
+
+def MyProfileView(request, profile_id):
+    print(f"Received profile_id: {profile_id}")
+    user_profile = get_object_or_404(profile, id=profile_id)
+    print(f"Found profile: {user_profile}")
+
+    return render(request, 'app/profile_detail.html', {'profile_obj': user_profile})
 
 
 @login_required
 def ProfileDetailView(request, profile_id):
     # Use get_object_or_404 to retrieve the profile
     profile_obj = get_object_or_404(profile, id=profile_id)
-    print(f"Profile Picture URL: {profile_obj.profile_pic.url}")
-    print(f"Profile ID: {profile_id}")
-
-
-    
-
 
     send_message_url = reverse('app:send_message', args=[profile_obj.id])
 

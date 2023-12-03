@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+# from .views import my_profile_view, ProfileDetailView
+
 
 
 app_name = 'app'
@@ -7,8 +9,11 @@ app_name = 'app'
 urlpatterns = [
     path('', views.homeView, name='home'),
 
+    path('my_profile/<int:profile_id>/', views.MyProfileView, name='my_profile'),
+
+
     path('new_profile/', views.NewProfileView, name='new_profile'), #CREATE
-    path('', views.ProfileListView, name = 'profile_list'), #READ
+    path('profiles/', views.ProfileListView, name = 'profile_list'), #READ
     path('<int:profile_id>/profile_detail/', views.ProfileDetailView, name='profile_detail'), #READ
     path('<int:profile_id>/update', views.ProfileUpdateView, name='profile_update'), #UPDATE
     path('<int:profile_id>/delete', views.ProfileDeleteView, name='profile_delete'), #DELETE
@@ -29,5 +34,6 @@ urlpatterns = [
     path('message_inbox/', views.MessageRetrievalView, name='message_inbox'),
 
 ]
+
 
 
