@@ -67,8 +67,9 @@ def NewProfileView(request):
 
 def ProfileListView(request):
     profiles = profile.objects.all()
-
-    return render(request, 'app/profile_list.html',{'profiles': profiles})
+    # profiles = profile.objects.exclude(id=request.user.profile.id)
+    print(f'{request.user.profile.id=}')
+    return render(request, 'app/profile_list.html',{'profiles': profiles, 'profile_id':int(request.user.profile.id)})
 
 
 def MyProfileView(request, profile_id):

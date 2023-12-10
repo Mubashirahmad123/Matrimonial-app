@@ -13,7 +13,7 @@ urlpatterns = [
 
 
     path('new_profile/', views.NewProfileView, name='new_profile'), #CREATE
-    path('profiles/', views.ProfileListView, name = 'profile_list'), #READ
+    path('profiles/', views.ProfileListView, name='profile_list'), #READ
     path('<int:profile_id>/profile_detail/', views.ProfileDetailView, name='profile_detail'), #READ
     path('<int:profile_id>/update', views.ProfileUpdateView, name='profile_update'), #UPDATE
     path('<int:profile_id>/delete', views.ProfileDeleteView, name='profile_delete'), #DELETE

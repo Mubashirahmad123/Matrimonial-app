@@ -64,7 +64,7 @@ class profile(models.Model):
         ('M','Male'),
         ('F','Female')
     ]
-    user = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, blank=True, null=True, on_delete=models.CASCADE)
 
     profile_pic=models.ImageField(null=True, blank=True)
     email = models.EmailField(max_length=200,unique=True)

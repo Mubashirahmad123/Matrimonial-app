@@ -28,6 +28,8 @@ SECRET_KEY = 'django-insecure-3=^12jtqs8a8*-l1=e2cn)ejcemyc%-)4$1ml@^1g%!y^0c+xg
 DEBUG = True
 
 ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['*']
+
 
 
 
@@ -136,7 +138,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS =[
+STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
@@ -189,3 +191,5 @@ INTERNAL_IPS = [
     "127.0.0.1",
 
 ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
