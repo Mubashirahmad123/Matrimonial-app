@@ -39,8 +39,6 @@ main.addEventListener("mouseenter", function () {
 
 // ripple effect
 
-
-
 function createRipple(event) {
     const ripple = document.createElement("div");
     ripple.className = "ripple";
@@ -87,3 +85,4 @@ function createRipple(event) {
         document.documentElement.style.setProperty('--animate-duration', '6s');
 
     });
+
